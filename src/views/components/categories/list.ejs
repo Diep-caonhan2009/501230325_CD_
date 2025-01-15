@@ -1,6 +1,9 @@
 <div class="content">
   <div class="container-fluid">
-    <h4 class="page-title">Danh sách sản phẩm</h4>
+    <div class="flex justify-content-between">
+      <h4 class="page-title">Danh sách sản phẩm</h4>
+      <a class="btn btn-default" href="/categories/create">Tạo loại sản phẩm</a>
+    </div>
     <div class="card">
       <div class="card-body">
         <table class="table table-head-bg-success">
@@ -17,7 +20,11 @@
             <tr>
               <td><%= index %></td>
               <td>
-                <img src="<%=category.image%>" alt="image" class="category-label" />
+                <img
+                  src="<%=category.image%>"
+                  alt="image"
+                  class="category-label"
+                />
               </td>
               <td><%=category.code%></td>
               <td><%=category.name%></td>
