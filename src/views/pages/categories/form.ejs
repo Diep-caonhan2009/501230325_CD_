@@ -11,7 +11,12 @@
 			</div>
 		</div>
 	</div>
-	<!-- Modal -->
 </body>
 <%- include('../../layouts/script/main'); %>
+<script>
+	const mode = '<%=mode%>%'
+	if (mode === "Delete") {
+		$(".categoryInput").attr("disabled", "dissable");
+	}
+</script>
 </html>
