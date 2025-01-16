@@ -2,7 +2,7 @@ import CategoryModel from "../models/categoryModel.js";
 import { ObjectId } from "mongodb";
 export async function listCategory(req, res) {
   try {
-    const categories = await CategoryModel.find();
+    const categories = await CategoryModel.find({deleteAT: null});
     res.render("pages/categories/list", {
       title: "Categories",
       categories: categories,
@@ -38,8 +38,9 @@ export async function createCategory(req, res) {
 }
 
 export async function renderPageUpdateCategory(req, res) {
+  try {
     const {id} = req.params;
-    const category = await CategoryModel.findOne({_id: new ObjectId(id)});
+    const category = await CategoryModel.findOne({_id: new ObjectId(id), deleteAT: null});
     if(category){
         res.render("pages/categories/form", {
             title: "Create Categories",
@@ -49,6 +50,10 @@ export async function renderPageUpdateCategory(req, res) {
     }else{
         res.send("Hiện không có sản phẩm nào phù hợp");
     }
+  } catch (error) {
+    res.send("trang web này không tồn tại");
+  }
+
 }
 
 export async function UpdateCategory(req, res) {
@@ -65,10 +70,47 @@ export async function UpdateCategory(req, res) {
         updateAT: new Date(),
       }
     );
-    res.send("cập nhật thành công");
-    // res.redirect("/categories");
+
+    res.redirect("/categories");
   } catch (error) {
     console.log(error);
     res.send("cập nhật sản phẩm không thành công!");
   }
+}
+
+export async function renderPageDeleteCategory(req, res) {
+  try {
+    const {id} = req.params;
+    const category = await CategoryModel.findOne({_id: new ObjectId(id), deleteAT: null});
+    if(category){
+        res.render("pages/categories/form", {
+            title: "Delete Categories",
+            mode: "Delete",
+            category: category
+          });
+    }else{
+        res.send("Hiện không có sản phẩm nào phù hợp");
+    }
+  } catch (error) {
+      console.log(error);
+      res.send("trang này không tồn tại");
+  }
+}
+
+export async function deleteCategory(req, res) {
+const {id } = req.body;
+try {
+  await CategoryModel.deleteOne(
+    {
+      _id: new ObjectId(id),
+    },
+    {
+      deleteAT: new Date(),
+    }
+  );
+  res.redirect("/categories");
+} catch (error) {
+  console.log(error);
+  res.send("xóa sản phẩm không thành công!");
+}
 }
