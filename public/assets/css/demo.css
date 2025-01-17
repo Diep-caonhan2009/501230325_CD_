@@ -108,3 +108,6 @@
 .hide{
 	display: none;
 }
+.max-w-10{
+	max-width: 10rem;
+}

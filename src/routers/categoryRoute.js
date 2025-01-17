@@ -15,7 +15,7 @@ router.get("/create", renderPageCreateCategory);
 router.post("/create", createCategory);
 
 router.get("/update/:id", renderPageUpdateCategory);
-router.post("/update", UpdateCategory);
+router.post("/update/:id", UpdateCategory);
 
 router.get("/delete/:id", renderPageDeleteCategory);
 router.post("/delete", deleteCategory);

@@ -67,7 +67,7 @@
         }
         if(prevPage < 1) return
         urlParams.forEach((value, key) => {
-            if (key!==page) {
+            if (key!=="page") {
                 queryString.push(`${key}=${value}`)
             }
         })
@@ -75,5 +75,24 @@
         queryString.push("page="+prevPage)
         let url = "/categories?" + queryString.join("&&");
         window.location.href = url
+    }
+    function changeSort(event) {
+        const value = event.target.value;
+        let urlParams = new URLSearchParams(window.location.search);
+        let queryString = [];
+
+        let page = urlParams.get("page");
+
+        if (page < 1) return;
+
+        urlParams.forEach((value, key) => {
+            if (key !== "sort") {
+                queryString.push(`${key}=${value}`);
+            }
+        });
+
+        queryString.push("sort=" + value);
+        let url = "/categories?" + queryString.join("&");
+        window.location.href = url;
     }
 </script>
