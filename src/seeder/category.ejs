@@ -1,0 +1,35 @@
+import CategoryModel from "../models/categoryModel.js";
+const data = [
+    {
+        code:"AN_001",
+        name:"Áo nữ",
+        image:"cat-1.jpg",
+        searchString:"ao nu",
+        creatAt: new Date(),
+    },
+    {
+        code:"MA_001",
+        name:"Máy ảnh",
+        image:"cat-1.jpg",
+        searchString:"may anh",
+        creatAt: new Date(),
+    },
+    {
+        code:"GN_001",
+        name:"Giày nam",
+        image:"giay nam",
+        searchString:"cat-1.jpg",
+        creatAt: new Date(),
+    },
+    {
+        code:"Mp_001",
+        name:"Mỹ phẩm",
+        image:"cat-1.jpg",
+        searchString:"my pham",
+        creatAt: new Date(),
+    },
+]
+export default async function categorySeeder(){
+    await CategoryModel.deleteMany()
+    await CategoryModel.insertMany(data)
+}
